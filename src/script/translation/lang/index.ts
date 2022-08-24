@@ -1,0 +1,2 @@
+/* add All lang */
+export {};
