@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import setUserDataReducer from "./user.reducer";
 const reducers = {
-  userData: setUserDataReducer,
+  userLogin: setUserDataReducer,
 };
 export default combineReducers(reducers);

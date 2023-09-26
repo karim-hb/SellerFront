@@ -36,7 +36,7 @@ const Login = (props: any) => {
   const handleLogin = () => {
     if (values.password && values.email) {
       var data = {
-        email: values.email,
+        username: values.email,
         password: values.password,
       };
       dispatch(loginAction(data));
@@ -45,7 +45,7 @@ const Login = (props: any) => {
   return (
     <>
       <Typography variant="body1">ورود </Typography>
-      <Box
+  {/*     <Box
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -63,7 +63,7 @@ const Login = (props: any) => {
         >
           ساخت حساب کاربری
         </Typography>
-      </Box>
+      </Box> */}
       <Box
         component="form"
         sx={{

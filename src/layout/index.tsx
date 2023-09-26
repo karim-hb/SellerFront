@@ -10,10 +10,8 @@ const Layout = (props: any) => {
       <Box
         sx={{
           background:
-            "linear-gradient(to left, rgba(0,0,0,0.1),  rgba(0,0,0,0.08), rgba(0,0,0,0.07), rgba(0,0,0,0.04), rgba(0,0,0,0.01))",
-          mr: { lg: "350px", md: "300px", minHeight: "100vh" },
-          pt: 8,
-          px: 3,
+            "#e8e8e8",
+          mr: { lg: "250px", md: "200px", minHeight: "100vh" },
         }}
         component="main"
       >

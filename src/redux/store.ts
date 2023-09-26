@@ -1,22 +1,22 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import rootReducer from './reducer';
+import { applyMiddleware, createStore } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from "redux-thunk";
+import reducers from "./reducer";
 
-const initialState = {};
+const userInfoFromStorage = localStorage.getItem("userInfo")
+  ? JSON.parse(localStorage.getItem("userInfo")!)
+  : null;
 
-const middleWare = [thunk];
+const initialState: any = {
+  userLogin: { userInfo: userInfoFromStorage },
+};
 
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-  }
-}
+const middleware = [thunk];
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
-  rootReducer,
+  reducers,
   initialState,
-  composeEnhancers(applyMiddleware(...middleWare))
+  composeWithDevTools(applyMiddleware(...middleware))
 );
 
 export default store;

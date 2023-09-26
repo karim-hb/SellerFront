@@ -5,6 +5,8 @@ import "./style/main.css";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import "react-image-lightbox/style.css";
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

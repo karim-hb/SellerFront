@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Response } from "../interface";
 
 import { __Response } from "../interface/general";
@@ -5,8 +6,12 @@ export const SERVER = "dada";
 
 function generateHeader(object: any = {}): any {
   const header: { [k: string]: any } = {};
-  if (localStorage.getItem("_s") && JSON.parse(localStorage.getItem("_s")!)) {
-    header["Token"] = "Token " + JSON.parse(localStorage.getItem("_s")!);
+  if (
+    localStorage.getItem("userInfo") &&
+    JSON.parse(localStorage.getItem("userInfo")!)
+  ) {
+    header["Authorization"] =
+      "JWT " + JSON.parse(localStorage.getItem("userInfo")!)?.access;
   }
   for (const key of Object.keys(object)) {
     header[key] = object[key];
@@ -20,7 +25,7 @@ export function del<R>(url: string, body: any): Promise<Response<R | null>> {
     fetch(url, {
       method: "DELETE",
       body: JSON.stringify(body),
-      /*       headers: generateHeader({ "Content-Type": "application/json" }), */
+            headers: generateHeader({ "Content-Type": "application/json" }),
     })
       .then(function (response) {
         status = response.status;
@@ -57,7 +62,23 @@ export function post<R>(url: string, body: any): Promise<Response<R | null>> {
       });
   });
 }
-
+export function post2(url: string, body: any): any {
+  axios
+    .post(url, body, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `JWT ${
+          JSON.parse(localStorage.getItem("userInfo")!).access
+        }`,
+      },
+    })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+}
 export function put<R>(url: string, body: any): Promise<Response<R | null>> {
   let status: number;
   return new Promise((resolve, reject) => {
@@ -117,6 +138,7 @@ export function get<R>(
   return new Promise((resolve, reject) => {
     fetch(generatedUrl.href, {
       method: "GET",
+      headers: generateHeader({ "Content-Type": "application/json" }),
     })
       .then(function (response) {
         status = response.status;

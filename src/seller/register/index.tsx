@@ -38,13 +38,7 @@ const Register = () => {
             width: "100%",
           }}
         >
-      
-            {hasAccount ? (
-              <Login setHasAccount={(data: boolean) => setHasAccount(data)} />
-            ) : (
-              <SignIN setHasAccount={(data: boolean) => setHasAccount(data)} />
-            )}
-    
+          <Login setHasAccount={(data: boolean) => setHasAccount(data)} />
           <Box sx={{ borderTop: "1px solid #cccccc", pt: 3, px: 1 }}>
             <Typography variant="body2">
               ورود شما به سایت به معنی این است شما تمام قوانین سایت را پذیرفته

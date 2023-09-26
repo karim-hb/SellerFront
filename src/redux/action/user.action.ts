@@ -1,5 +1,4 @@
 import { post, responseValidator } from "../../script/api";
-import useLocalStorage from "../../script/useLocalStorage";
 import { API } from "../../seller.api";
 import * as types from "../constant/user.constant";
 export const createNewAccountAction = (data: any) => (dispatch: Function) => {
@@ -37,13 +36,11 @@ export const loginAction = (data: any) => (dispatch: Function) => {
   });
   post(API.auth.genrate_token, data).then((response: any) => {
     if (responseValidator(response) && response.data) {
-      localStorage.setItem("_s", JSON.stringify(response.data.token));
+      localStorage.setItem("userInfo", JSON.stringify( response.data));
 
       dispatch({
         type: types.LOGIN_USER_SUCCESS,
-        payload: {
-          email: data.email,
-        },
+        payload: response.data,
       });
     } else {
       dispatch({

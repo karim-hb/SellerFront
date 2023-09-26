@@ -1,3 +1,11 @@
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
+import DinnerDiningIcon from "@mui/icons-material/DinnerDining";
+import FastfoodIcon from "@mui/icons-material/Fastfood";
+import LogoutIcon from "@mui/icons-material/Logout";
+import MenuIcon from "@mui/icons-material/Menu";
+import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import {
   Box,
   Button,
@@ -8,21 +16,8 @@ import {
   SwipeableDrawer,
   Typography,
 } from "@mui/material";
-import { NavLink } from "react-router-dom";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import FastfoodIcon from "@mui/icons-material/Fastfood";
-import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
-import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import { useLocation } from "react-router-dom";
-import DinnerDiningIcon from "@mui/icons-material/DinnerDining";
-import SettingsIcon from "@mui/icons-material/Settings";
-import PieChartIcon from "@mui/icons-material/PieChart";
-import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
-import LogoutIcon from "@mui/icons-material/Logout";
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 type Anchor = "right";
 const SideBar = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -84,7 +79,7 @@ const SideBarVeiw = () => {
         height: "100vh",
         position: { md: "fixed" },
         width: "100%",
-        maxWidth: { lg: "350px", md: "300px" },
+        maxWidth: { lg: "250px", md: "200px" },
         overflowX: "hidden",
         overflowY: { md: "hidden" },
       }}
@@ -112,8 +107,7 @@ const SideBarVeiw = () => {
           <DinnerDiningIcon sx={{ color: "#58c52b" }} />
         </Box>
         <Typography sx={{ color: "#58c52b" }} variant="h5">
-          {" "}
-          پسنپ فود
+        پنل ادمین
         </Typography>
       </Box>
 
@@ -126,7 +120,7 @@ const SideBarVeiw = () => {
             <ListItemIcon>
               <DashboardIcon />
             </ListItemIcon>
-            <ListItemText sx={{ flex: "unset !important" }} primary="خانه" />
+            <ListItemText sx={{ flex: "unset !important" }} primary="سفارشات" />
             <Box
               className={`activeBorder transition  ${
                 location.pathname === "/" && "activeBorderShow"
@@ -153,7 +147,7 @@ const SideBarVeiw = () => {
 
         <NavLink
           className={({ isActive }) => (isActive ? "activeNav" : undefined)}
-          to="/orders"
+          to="/collection"
         >
           <ListItem sx={{ py: 1, px: 3, position: "relative" }} button>
             <ListItemIcon>
@@ -161,18 +155,18 @@ const SideBarVeiw = () => {
             </ListItemIcon>
             <ListItemText
               sx={{ flex: "unset !important" }}
-              primary="سفارش ها"
+              primary="دسته بندی ها"
             />
             <Box
               className={`activeBorder transition  ${
-                location.pathname === "/orders" && "activeBorderShow"
+                location.pathname === "/collection" && "activeBorderShow"
               }`}
             ></Box>
           </ListItem>
         </NavLink>
         <NavLink
           className={({ isActive }) => (isActive ? "activeNav" : undefined)}
-          to="/transactions"
+          to="/users"
         >
           <ListItem sx={{ py: 1, px: 3, position: "relative" }} button>
             <ListItemIcon>
@@ -180,16 +174,16 @@ const SideBarVeiw = () => {
             </ListItemIcon>
             <ListItemText
               sx={{ flex: "unset !important" }}
-              primary="حساب بانکی"
+              primary=" کاربران"
             />
             <Box
               className={`activeBorder transition  ${
-                location.pathname === "/transactions" && "activeBorderShow"
+                location.pathname === "/users" && "activeBorderShow"
               }`}
             ></Box>
           </ListItem>
         </NavLink>
-        <NavLink
+        {/*     <NavLink
           className={({ isActive }) => (isActive ? "activeNav" : undefined)}
           to="/profile"
         >
@@ -207,62 +201,19 @@ const SideBarVeiw = () => {
               }`}
             ></Box>
           </ListItem>
-        </NavLink>
+        </NavLink> */}
       </List>
-      <Typography sx={{ mt: { md: 10 }, mx: 3 }} variant="h6">
-        تنظیمات
-      </Typography>
-      <List>
-        <NavLink
-          className={({ isActive }) => (isActive ? "activeNav" : undefined)}
-          to="/setting"
-        >
-          <ListItem sx={{ py: 1, px: 3, position: "relative" }} button>
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <ListItemText sx={{ flex: "unset !important" }} primary="تنظیمات" />
-            <Box
-              className={`activeBorder transition  ${
-                location.pathname === "/setting" && "activeBorderShow"
-              }`}
-            ></Box>
-          </ListItem>
-        </NavLink>
-        <NavLink
-          className={({ isActive }) => (isActive ? "activeNav" : undefined)}
-          to="/charts"
-        >
-          <ListItem sx={{ py: 1, px: 3, position: "relative" }} button>
-            <ListItemIcon>
-              <PieChartIcon />
-            </ListItemIcon>
-            <ListItemText sx={{ flex: "unset !important" }} primary="چارت" />
-            <Box
-              className={`activeBorder transition  ${
-                location.pathname === "/charts" && "activeBorderShow"
-              }`}
-            ></Box>
-          </ListItem>
-        </NavLink>
 
-        <NavLink
-          className={({ isActive }) => (isActive ? "activeNav" : undefined)}
-          to="/game"
+      <List>
+        <ListItem
+          onClick={() => {
+            localStorage.removeItem("userInfo");
+            window.location.replace("/")
+          }}
+          sx={{ mt: 13, py: 1, px: 3, position: "relative" }}
+          button
         >
-          <ListItem sx={{ py: 1, px: 3, position: "relative" }} button>
-            <ListItemIcon>
-              <SportsEsportsIcon />
-            </ListItemIcon>
-            <ListItemText sx={{ flex: "unset !important" }} primary="سرگرمی" />
-            <Box
-              className={`activeBorder transition  ${
-                location.pathname === "/game" && "activeBorderShow"
-              }`}
-            ></Box>
-          </ListItem>
-        </NavLink>
-        <ListItem sx={{ py: 1, px: 3, position: "relative" }} button>
+        
           <ListItemIcon>
             <LogoutIcon />
           </ListItemIcon>
@@ -275,12 +226,12 @@ const SideBarVeiw = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          mr: { md: 3 },
+          mr: { md: 0 },
           backgroundColor: "#81eb55a8",
-          width: "100%",
+          width: "98%",
           height: "300px",
           borderRadius: 2,
-          maxWidth: { lg: "300px", md: "250px" },
+          maxWidth: { lg: "280px", md: "250px" },
         }}
       >
         <Box
